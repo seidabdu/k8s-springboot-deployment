@@ -1,0 +1,36 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: seid-k8s-deployment
+  namespace: seid-demo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: seid-java
+  template:
+    metadata:
+      labels:
+        app: seid-java
+    spec:
+      containers:
+        - name: seid-container
+          image: seidpeace/seid-java:first
+          ports:
+            - containerPort: 8090      
+          imagePullPolicy: Always
+---          
+apiVersion: v1
+kind: Service
+metadata:
+  name: seid-demo-service
+  namespace: seid-demo
+spec:
+  selector:
+    app: seid-java
+  ports:
+    - nodePort: 30163
+      port: 80
+      targetPort: 8090
+  type: NodePort
