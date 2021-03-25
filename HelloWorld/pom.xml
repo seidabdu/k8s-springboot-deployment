@@ -9,8 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>seid.demo.kube</groupId>
-	<artifactId>k8s-spring-deployment</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>k8s-spring-deployment</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
@@ -38,4 +37,5 @@
 		</plugins>
 	</build>
 
+	<artifactId>hellow-world</artifactId>
 </project>
