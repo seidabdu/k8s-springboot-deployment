@@ -1,0 +1,21 @@
+management:
+  endpoints:
+    enabled-by-default: false
+  endpoint:
+    health:
+      enabled: true
+      group:
+        liveness:
+          include: "livenessStateProbeIndicator"
+        readiness:
+          include: "readinessStateProbeIndicator"
+        
+        
+server:
+    port: 8099
+ 
+spring:
+    security:
+        user:
+            name: seid
+            password: seid
