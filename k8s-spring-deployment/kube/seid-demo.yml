@@ -3,20 +3,19 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: seid-k8s-deployment
-  namespace: seid-demo
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: seid-java
+      app:  seid-k8s-deployment
   template:
     metadata:
       labels:
-        app: seid-java
+        app: seid-k8s-deployment
     spec:
       containers:
-        - name: seid-container
-          image: seidpeace/seid-java:first
+        - name: seid-k8s-deployment
+          image: 'gcr.io/seid-demo/k8s-springboot-demo:v1'
           ports:
             - containerPort: 8090      
           imagePullPolicy: Always
@@ -24,13 +23,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: seid-demo-service
-  namespace: seid-demo
+  name: seid-demo-service 
 spec:
   selector:
-    app: seid-java
+    app: seid-k8s-deployment
   ports:
     - nodePort: 30163
       port: 80
       targetPort: 8090
-  type: NodePort
+  type: LoadBalancer
