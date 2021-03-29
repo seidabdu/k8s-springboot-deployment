@@ -1,0 +1,30 @@
+server:
+    port: 8090
+    
+    
+management:
+  endpoints:
+    enabled-by-default: false
+  endpoint:
+    health:
+      enabled: true
+      group:
+        liveness:
+          include: "livenessStateProbeIndicator"
+        readiness:
+          include: "readinessStateProbeIndicator"
+          
+          
+app:
+  config: Default value
+  environmentVariable: ${ENVIRONMENT_CONFIG_SEID:Default value}
+  
+ 
+hello:
+  greeting: ${GREETING_SEID}
+  
+user:
+  name: ${SECRETS_DEMO_USER:demo}
+  password: ${SECRETS_DEMO_USER_PASSWD:demo}
+
+

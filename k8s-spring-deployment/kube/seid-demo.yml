@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   name: seid-k8s-deployment
 spec:
-  replicas: 2
+  replicas: 4
   selector:
     matchLabels:
       app: seid-java
@@ -15,24 +15,45 @@ spec:
     spec:
       containers:
         - name: seid-java
-          image: 'seidpeace/seid-java:first'
+          image: seidpeace/seid-java:v1
           ports:
             - containerPort: 8090
+              protocol: TCP
           imagePullPolicy: Always
-          readinessProbe:
-            httpGet:
-              path: /id
-              port: 8080
-            periodSeconds: 1
-            initialDelaySeconds: 8
+          env:
+          - name: GREETING_SEID
+            valueFrom:
+              configMapKeyRef:
+                name: spring-config
+                key: hello.greeting
+          - name: ENVIRONMENT_CONFIG_SEID
+            valueFrom:
+              configMapKeyRef:
+                name: spring-config
+                key: ENVIRONMENT_CONFIG
+          - name: SECRETS_DEMO_USER
+            valueFrom:
+              secretKeyRef:
+                name: db-secret
+                key: spring.user.name
+          - name: SECRETS_DEMO_USER_PASSWD
+            valueFrom:
+              secretKeyRef:
+                name: db-secret
+                key: spring.user.password
           livenessProbe:
             httpGet:
-              path: /id
-              port: 8080
-            initialDelaySeconds: 8
-            periodSeconds: 1
-
----          
+              path: /actuator/health
+              port: 8090
+            initialDelaySeconds: 50
+            periodSeconds: 50          
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8090
+            initialDelaySeconds: 50
+            periodSeconds: 50   
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -45,3 +66,4 @@ spec:
       port: 80
       targetPort: 8090
   type: NodePort
+

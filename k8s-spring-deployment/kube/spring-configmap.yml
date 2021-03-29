@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: spring-config
+data:
+  hello.greeting: Howdy, Spring-K8S!
+  ENVIRONMENT_CONFIG: Configuration from Docker environment in Kubernetes!
