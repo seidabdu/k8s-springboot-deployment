@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: seid-java-green-v2
+spec:
+  selector:
+    app: seid-java
+    version: v2
+  ports:
+    - port: 80
+      targetPort: 8090
+      protocol: TCP
+  type: LoadBalancer

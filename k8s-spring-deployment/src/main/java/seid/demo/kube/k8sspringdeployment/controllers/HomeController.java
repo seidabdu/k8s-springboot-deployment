@@ -24,13 +24,17 @@ public class HomeController {
 
 	@GetMapping("/cred")
 	public String getCredentials() {
+		String  blue="\n======================\n this is the second blue green deployment process V2 of the project is being deployed here\n =================================\n=============================\n";
 		
-		return username + password;
+		
+		return username + password + blue;
 	}
 
 	@GetMapping("/home/k8s")
 	public String welcome() {
-		return value + externalConfig + environmentVariable;
+		String  blue="\n======================\n this is the second blue green deployment process V2 of the project is being deployed here\n =================================\n=============================\n";
+		return  value + externalConfig + environmentVariable + blue;
+
 	}
 
 }

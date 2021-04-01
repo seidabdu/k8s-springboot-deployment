@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: seid-ingress-green
+  namespace: default
+spec:
+  rules:
+  - host: seid.abdu.com
+    http:
+      paths: 
+      - path: /home/k8s
+        backend:
+          service:
+            name: seid-java-green-v2
+            port:
+              number: 80
+        pathType: ImplementationSpecific

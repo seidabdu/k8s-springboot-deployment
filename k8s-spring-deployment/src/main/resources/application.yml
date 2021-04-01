@@ -1,18 +1,19 @@
 server:
     port: 8090
     
-    
 management:
   endpoints:
-    enabled-by-default: false
-  endpoint:
-    health:
-      enabled: true
+    web:
+      exposure:
+        include: info, health,beans
+    #enabled-by-default: false
       group:
         liveness:
           include: "livenessStateProbeIndicator"
         readiness:
           include: "readinessStateProbeIndicator"
+ 
+      
           
           
 app:
