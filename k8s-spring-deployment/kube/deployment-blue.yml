@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: seid-deployment-v1
+  name: seid-deployment-blue-v1
 spec:
   replicas: 3
   strategy:

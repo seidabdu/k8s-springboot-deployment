@@ -7,12 +7,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HomeController {
 
+	public static String header = "\n\n=============================\n\n";
+	public static String footer = "\n\n=============================\n\n";
+
+	String blueMessage = "\n\nThis is blue deployment with version V1 representing the exsting app running in Prod.\n\n";
+
+	String greenMessage = "\n\nThis is Green deployment with version V2 representing the new version rolling out.\n\n";
+
 	@Value("${hello.greeting:wellcome seid abdu}")
 	String value;
 
 	@Value("${app.config}")
 	String externalConfig;
-	
+
 	@Value("${app.environmentVariable}")
 	String environmentVariable;
 
@@ -24,16 +31,13 @@ public class HomeController {
 
 	@GetMapping("/cred")
 	public String getCredentials() {
-		String  blue="\n======================\n this is the second blue green deployment process V2 of the project is being deployed here\n =================================\n=============================\n";
-		
-		
-		return username + password + blue;
+
+		return header + greenMessage + username + password + footer;
 	}
 
 	@GetMapping("/home/k8s")
 	public String welcome() {
-		String  blue="\n======================\n this is the second blue green deployment process V2 of the project is being deployed here\n =================================\n=============================\n";
-		return  value + externalConfig + environmentVariable + blue;
+		return header + greenMessage + value + externalConfig + environmentVariable + footer;
 
 	}
 

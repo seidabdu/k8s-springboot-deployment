@@ -4,13 +4,13 @@ metadata:
   name: seid-ingress-test
   namespace: default
   annotations:     
-   ingress.kubernetes.io/rewrite-target: /home/k8s
+    nginx.ingress.kubernetes.io/rewrite-target: /$2 
 spec:
   rules:
   - host: seid.abdu.com
     http:
       paths: 
-      - path: /test
+      - path: /test(/|$)(.*)
         backend:
           service:
             name: seid-java-test-green-v2

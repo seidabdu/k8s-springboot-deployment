@@ -22,10 +22,13 @@ app:
   
  
 hello:
-  greeting: ${GREETING_SEID}
+  greeting: ${GREETING_SEID:seidabdu}
   
 user:
   name: ${SECRETS_DEMO_USER:demo}
   password: ${SECRETS_DEMO_USER_PASSWD:demo}
 
-
+spring:
+  output:
+    ansi:
+      enabled: ALWAYS
